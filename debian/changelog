@@ -1,29 +1,81 @@
-hostname (3.06ubuntu1) oneiric; urgency=low
+hostname (3.15) unstable; urgency=low
 
-  * Merge from debian unstable (LP: #788453), remaining changes:
-    - Install Upstart job to set hostname on startup, but do not run it in
-      postinst.
-    - Build-depend on newer debhelper for Upstart-aware dh_installinit.
-  * drop change for "Don't compare versions during the build", as debian/rules
-    uses a different mechanism for comparison that is more reasonable.
+  * Applied patch to make it possible to install binaries and man pages into
+    custom directories.
+    Thanks to Jiri Popelka <jpopelka@redhat.com> (Closes: #726484)
+  * Tried to clarify manpage. (Closes: #718393)
+  * Removed hostname.1.fr with was outdated and not kept in sync.
 
- -- Scott Moser <smoser@ubuntu.com>  Thu, 26 May 2011 19:42:15 +0200
+ -- Michael Meskes <meskes@debian.org>  Sun, 03 Nov 2013 15:27:04 +0100
+
+hostname (3.14) unstable; urgency=low
+
+  * Symlink binaries instead of hardlinking them. (Closes: #718400)
+
+ -- Michael Meskes <meskes@debian.org>  Fri, 06 Sep 2013 12:06:19 +0200
+
+hostname (3.13) unstable; urgency=low
+
+  * Finally completely remove verbose option.
+    Thanks to Jiri Popelka <jpopelka@redhat.com> (Closes: #703974)
+  * Bumped Standards-Version to 3.9.4, no changes needed.
+
+ -- Michael Meskes <meskes@debian.org>  Tue, 18 Jun 2013 11:51:37 +0200
+
+hostname (3.12) unstable; urgency=low
+
+  * Rewrote parts of the manpage.
+    Thanks to Ben Wong <bugs.debian.org@wongs.net> (Closes: #568889)
+  * Bumped Standards-Version to 3.9.3, no changes needed.
+
+ -- Michael Meskes <meskes@debian.org>  Thu, 06 Dec 2012 16:15:53 +0100
+
+hostname (3.11) unstable; urgency=low
+
+  * Fixed typo in manpage.
+    Thanks to Regid Ichira <regid23@yahoo.com> (Closes: #659836)
+  * Order options alphabetically in program.
+    Thanks to Jari Aalto <jari.aalto@cante.net> (Closes: #660106)
+  * Combine options in manpage.
+  * Do not install hostname.1.fr anymore because it is outdated.
+
+ -- Michael Meskes <meskes@debian.org>  Thu, 16 Feb 2012 16:02:01 +0100
+
+hostname (3.10) unstable; urgency=low
+
+  * Enabled hardened build flag.
+    Thanks to Moritz Muehlenhoff <jmm@debian.org> (Closes: #655874)
+
+ -- Michael Meskes <meskes@debian.org>  Sun, 15 Jan 2012 13:52:38 +0100
+
+hostname (3.09) unstable; urgency=low
+
+  * Order items alphabetically in manpage.
+    Thanks to Jari Aalto <jari.aalto@cante.net> (Closes: #653269)
+
+ -- Michael Meskes <meskes@debian.org>  Wed, 28 Dec 2011 15:14:48 +0100
+
+hostname (3.08) unstable; urgency=low
+
+  * Prevent a potential buffer underrun.
+  * Clarified FQDN message in man page. (Closes: #626292)
+  * Use Breaks instead of Conflicts.
+
+ -- Michael Meskes <meskes@debian.org>  Fri, 23 Dec 2011 11:07:34 +0100
+
+hostname (3.07) unstable; urgency=low
+
+  * Strip leading and trailing whitespaces from hostname. (Closes: #650822)
+  * Bumped Standards-Version to 3.9.2, no changes needed.
+  * Added build-arch and build-indep targets to rules file.
+
+ -- Michael Meskes <meskes@debian.org>  Thu, 22 Dec 2011 16:31:05 +0100
 
 hostname (3.06) unstable; urgency=low
 
   * Relax version comparison to make binnmus possible. (Closes: #616683)
 
  -- Michael Meskes <meskes@debian.org>  Mon, 07 Mar 2011 12:31:08 +0100
-
-hostname (3.05ubuntu1) natty; urgency=low
-
-  * Merge from debian unstable (LP: #676474), remaining changes:
-    - Install Upstart job to set hostname on startup, but do not run it in
-      postinst.
-    - Build-depend on newer debhelper for Upstart-aware dh_installinit.
-  * Don't compare versions during the build to avoid the package FTBFS
-
- -- Lorenzo De Liso <blackz@ubuntu.com>  Wed, 17 Nov 2010 16:42:29 +0100
 
 hostname (3.05) unstable; urgency=low
 
@@ -34,15 +86,6 @@ hostname (3.05) unstable; urgency=low
 
  -- Michael Meskes <meskes@debian.org>  Tue, 16 Nov 2010 14:31:07 +0100
 
-hostname (3.04ubuntu1) maverick; urgency=low
-
-  * Merge from debian unstable (LP: #590481), remaining changes:
-    - Install Upstart job to set hostname on startup, but do not run it in
-      postinst.
-    - Build-depend on newer debhelper for Upstart-aware dh_installinit.
-
- -- Lorenzo De Liso <blackzldl@gmail.com>  Sun, 06 Jun 2010 20:08:11 +0200
-
 hostname (3.04) unstable; urgency=low
 
   * Don't strip domain before resolving it for a fqdn hostname. (Closes:
@@ -50,15 +93,6 @@ hostname (3.04) unstable; urgency=low
   * Bumped Standards-Version to 3.8.4, no changes needed.
 
  -- Michael Meskes <meskes@debian.org>  Mon, 22 Mar 2010 11:58:16 +0100
-
-hostname (3.03ubuntu1) lucid; urgency=low
-
-  * Merging from Debian Testing, remaining changes:
-     - Install Upstart job to set hostname on startup, but do not run it in
-       postinst.
-     - Build-depend on newer debhelper for Upstart-aware dh_installinit.
-
- -- Vikram Dhillon <dhillonv10@gmail.com>  Wed, 10 Mar 2010 19:00:50 +0000
 
 hostname (3.03) unstable; urgency=low
 
@@ -83,15 +117,6 @@ hostname (3.02) unstable; urgency=low
 
  -- Michael Meskes <meskes@debian.org>  Fri, 15 Jan 2010 13:08:57 +0100
 
-hostname (3.01ubuntu1) lucid; urgency=low
-
-  * Resynchronise with Debian. Remaining changes:
-    - Install Upstart job to set hostname on startup, but do not run it in
-      postinst.
-    - Build-depend on newer debhelper for Upstart-aware dh_installinit.
-
- -- Colin Watson <cjwatson@ubuntu.com>  Mon, 14 Dec 2009 15:02:30 +0000
-
 hostname (3.01) unstable; urgency=low
 
   * Made 'hostname -s' only display the host name cut at the first dot.
@@ -115,15 +140,6 @@ hostname (2.99) unstable; urgency=low
     drops the {yp,nis,} commands.
 
  -- Michael Meskes <meskes@debian.org>  Mon, 28 Sep 2009 15:31:05 +0200
-
-hostname (2.98ubuntu1) lucid; urgency=low
-
-  * Resynchronise with Debian. Remaining changes:
-    - Install Upstart job to set hostname on startup, but do not run it in
-      postinst.
-    - Build-depend on newer debhelper for Upstart-aware dh_installinit.
-
- -- Colin Watson <cjwatson@ubuntu.com>  Wed, 09 Dec 2009 14:34:13 +0000
 
 hostname (2.98) unstable; urgency=low
 
@@ -160,20 +176,6 @@ hostname (2.96) unstable; urgency=low
   * Orphaning package.
 
  -- Daniel Baumann <daniel@debian.org>  Thu, 27 Aug 2009 10:01:51 +0200
-
-hostname (2.95ubuntu1) karmic; urgency=low
-
-  FFE LP: #427356.
-
-  * Add -b option that allows the file specified by -F to be non-existant
-    or empty, in which case the default hostname of "localhost" will be set
-    if none is set currently.
-  * Install Upstart job to set hostname on startup, but do not run it in
-    postinst.
-  * debian/control:
-    - Bump build-dependency on debhelper for Upstart-aware dh_installinit
-
- -- Scott James Remnant <scott@ubuntu.com>  Tue, 15 Sep 2009 03:37:22 +0100
 
 hostname (2.95) unstable; urgency=low
 

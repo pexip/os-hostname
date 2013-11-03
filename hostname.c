@@ -3,7 +3,7 @@
  *		that maintains the host name and the domain name. It
  *		is also used to show the FQDN and the IP-Addresses.
  *
- * Usage:	hostname [-d|-f|-s|-a|-i|-y|-A|-I]
+ * Usage:	hostname [-a|-A|-d|-f|-i|-I|-s|-y]
  *		hostname [-h|-V]
  *		hostname [-b] {name|-F file}
  *		dnsdomainname
@@ -45,7 +45,7 @@
 #include <err.h>
 #include <rpcsvc/ypclnt.h>
 
-#define VERSION "3.06"
+#define VERSION "3.15"
 
 enum type_t { DEFAULT, DNS, FQDN, SHORT, ALIAS, IP, NIS, NIS_DEF, ALL_FQDNS, ALL_IPS };
 
@@ -146,32 +146,32 @@ void
 usage(FILE *stream)
 {
 	fprintf(stream,
-		"Usage: hostname [-v] [-b] {hostname|-F file}         set host name (from file)\n"
-		"       hostname [-v] [-d|-f|-s|-a|-i|-y|-A|-I]             display formatted name\n"
-		"       hostname [-v]                                 display host name\n"
+		"Usage: hostname [-b] {hostname|-F file}         set host name (from file)\n"
+		"       hostname [-a|-A|-d|-f|-i|-I|-s|-y]       display formatted name\n"
+		"       hostname                                 display host name\n"
 		"\n"
-		"       {yp,nis,}domainname [-v] {nisdomain|-F file}  set NIS domain name (from file)\n"
-		"       {yp,nis,}domainname [-v]                      display NIS domain name\n"
+		"       {yp,nis,}domainname {nisdomain|-F file}  set NIS domain name (from file)\n"
+		"       {yp,nis,}domainname                      display NIS domain name\n"
 		"\n"
-		"       dnsdomainname [-v]                            display dns domain name\n"
+		"       dnsdomainname                            display dns domain name\n"
 		"\n"
-		"       hostname -V|--version|-h|--help               print info and exit\n"
+		"       hostname -V|--version|-h|--help          print info and exit\n"
 		"\n"
 		"Program name:\n"
 		"       {yp,nis,}domainname=hostname -y\n"
 		"       dnsdomainname=hostname -d\n"
 		"\n"
 		"Program options:\n"
-		"    -s, --short            short host name\n"
 		"    -a, --alias            alias names\n"
+		"    -A, --all-fqdns        all long host names (FQDNs)\n"
+		"    -b, --boot             set default hostname if none available\n"
+		"    -d, --domain           DNS domain name\n"
+		"    -f, --fqdn, --long     long host name (FQDN)\n"
+		"    -F, --file             read host name or NIS domain name from given file\n"
 		"    -i, --ip-address       addresses for the host name\n"
 		"    -I, --all-ip-addresses all addresses for the host\n"
-		"    -f, --fqdn, --long     long host name (FQDN)\n"
-		"    -A, --all-fqdns        all long host names (FQDNs)\n"
-		"    -d, --domain           DNS domain name\n"
+		"    -s, --short            short host name\n"
 		"    -y, --yp, --nis        NIS/YP domain name\n"
-		"    -b, --boot             set default hostname if none available\n"
-		"    -F, --file             read host name or NIS domain name from given file\n"
 		"\n"
 		"Description:\n"
 		"   This command can get or set the host name or the NIS domain name. You can\n"
@@ -210,8 +210,17 @@ check_name(char *name)
 void
 set_name(enum type_t type, char *name)
 {
+	int i;
+
 	switch (type) {
 	case DEFAULT:
+		/* Whitespaces are invalid characters in a hostname. */
+		/* Thus remove trailing and leading whitespaces. */
+		while (isspace(*name)) { name++; }
+		for (i = strlen(name) - 1; i >= 0 && isspace(name[i]); i--);       
+		name[i+1] = '\0';
+
+		/* Now check for a valid name. */
 		if (!check_name(name))
 			errx(1, "the specified hostname is invalid");
 
@@ -438,7 +447,6 @@ main(int argc, char **argv)
 		{"long", no_argument, 0, 'f'},
 		{"short", no_argument, 0, 's'},
 		{"version", no_argument, 0, 'V'},
-		{"verbose", no_argument, 0, 'v'},
 		{"alias", no_argument, 0, 'a'},
 		{"ip-address", no_argument, 0, 'i'},
 		{"all-ip-addresses", no_argument, 0, 'I'},
@@ -458,7 +466,7 @@ main(int argc, char **argv)
 	else if (!strcmp(progname, "nisdomainname"))
 		type = NIS_DEF;
 
-	while((o = getopt_long(argc, argv, "aAdfbF:h?iIsVvy", long_options, NULL)) != -1)
+	while((o = getopt_long(argc, argv, "aAdfbF:h?iIsVy", long_options, NULL)) != -1)
 		switch (o) {
 		case 'd':
 			type = DNS;
@@ -489,9 +497,6 @@ main(int argc, char **argv)
 			break;
 		case 'F':
 			file = optarg;
-			break;
-		case 'v':
-			/* Does not do anything. */
 			break;
 		case 'V':
 			printf("hostname %s\n", VERSION);
