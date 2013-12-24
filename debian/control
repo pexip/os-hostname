@@ -1,11 +1,13 @@
 Source: hostname
 Section: admin
 Priority: required
-Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Maintainer: Pexip AS <packaging@pexip.com>
+XSBC-Pexip-Original-Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
 XSBC-Original-Maintainer: Debian Hostname Team <hostname-devel@lists.alioth.debian.org>
-Uploaders: Michael Meskes <meskes@debian.org>
+XSBC-Pexip-Original-Uploaders: Michael Meskes <meskes@debian.org>
 Standards-Version: 3.9.1
 Build-Depends: debhelper (>= 7.4.20ubuntu1)
+XS-Pexip-Upstream: http://archive.ubuntu.com/ubuntu/ precise
 
 Package: hostname
 Architecture: any
