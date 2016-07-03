@@ -1,3 +1,32 @@
+hostname (3.18) unstable; urgency=medium
+
+  * Make sure memory is initialized to zero before attempting to read hostname.
+    Thanks to Marko Dimjašević <marko@cs.utah.edu> (Closes: #829010)
+  * Bumped Standards-Version to 3.9.8, no changes needed.
+  * Updated to debhelper 9.
+
+ -- Michael Meskes <meskes@debian.org>  Sun, 03 Jul 2016 21:26:17 +0200
+
+hostname (3.17) unstable; urgency=medium
+
+  * Applied patch by Szabolcs Nagy <nsz@port70.net> (Ccloses: #787780) to:
+    * Use _GNU_SOURCE feature test macro, instead of glibc internal __USE_GNU.
+    * Use getdomainname instead of yp_get_default_domain because it is more
+      widely available and avoids the -lnsl dependency.
+    * localnisdomain is kept, even though it should be the same as localdomain,
+      so the behaviour is not changed in case of an error.
+  * Replace 'dh-clean -k' with 'dh-prep'
+
+ -- Michael Meskes <meskes@debian.org>  Fri, 19 Feb 2016 13:00:23 +0100
+
+hostname (3.16) unstable; urgency=medium
+
+  * Changed buffer size to the recommended 255 character when working with
+    names instead of IPs. (Closes: #796922)
+  * Bumped Standards-Version to 3.9.6, no changes needed.
+
+ -- Michael Meskes <meskes@debian.org>  Tue, 01 Sep 2015 12:32:18 +0200
+
 hostname (3.15) unstable; urgency=low
 
   * Applied patch to make it possible to install binaries and man pages into

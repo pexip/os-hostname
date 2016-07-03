@@ -3,8 +3,8 @@ Section: admin
 Priority: required
 Maintainer: Debian Hostname Team <hostname-devel@lists.alioth.debian.org>
 Uploaders: Michael Meskes <meskes@debian.org>
-Standards-Version: 3.9.4
-Build-Depends: debhelper (>= 5)
+Standards-Version: 3.9.8
+Build-Depends: debhelper (>= 9)
 
 Package: hostname
 Architecture: any
