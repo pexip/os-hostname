@@ -7,7 +7,7 @@ XSBC-Original-Maintainer: Debian Hostname Team <hostname-devel@lists.alioth.debi
 XSBC-Pexip-Original-Uploaders: Michael Meskes <meskes@debian.org>
 Standards-Version: 3.9.1
 Build-Depends: debhelper (>= 7.4.20ubuntu1)
-XS-Pexip-Upstream: http://archive.ubuntu.com/ubuntu/ precise
+XS-Pexip-Upstream: http://ftp.debian.org/debian/ jessie
 
 Package: hostname
 Architecture: any
