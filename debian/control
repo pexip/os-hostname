@@ -6,7 +6,7 @@ XSBC-Pexip-Original-Maintainer: Debian Hostname Team <hostname-devel@lists.aliot
 XSBC-Pexip-Original-Uploaders: Michael Meskes <meskes@debian.org>
 Standards-Version: 3.9.4
 Build-Depends: debhelper (>= 5)
-XS-Pexip-Upstream: http://ftp.debian.org/debian/ jessie
+XS-Pexip-Upstream: http://ftp.debian.org/debian/ stretch
 
 Package: hostname
 Architecture: any
