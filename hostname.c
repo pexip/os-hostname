@@ -37,35 +37,32 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <getopt.h>
-#define __USE_GNU 1
 #include <string.h>
 #include <netdb.h>
 #include <errno.h>
 #include <ctype.h>
 #include <err.h>
-#include <rpcsvc/ypclnt.h>
 
-#define VERSION "3.15"
+#define VERSION "3.18"
 
 enum type_t { DEFAULT, DNS, FQDN, SHORT, ALIAS, IP, NIS, NIS_DEF, ALL_FQDNS, ALL_IPS };
 
 char *progname;
 
 /*
- * Return the name of the nis default domain. This is just a wrapper for
- * yp_get_default_domain.  If something goes wrong, program exits.
+ * Return the name of the nis default domain. Same as localdomain below,
+ * but reports failure for unset domain.
  */
 char *
 localnisdomain()
 {
-	char *buf = 0;
+	/* The historical NIS limit is 1024, the limit on Linux is 64.  */
+	static char buf[1025];
 	int myerror = 0;
 
-	myerror = yp_get_default_domain(&buf);
-
-	/* yp_get_default_domain failed, abort. */
-	if (myerror) {
-		printf("%s: %s\n", progname, yperr_string(myerror));
+	myerror = getdomainname(buf, sizeof buf);
+	if (myerror || strcmp(buf, "(none)") == 0) {
+		printf("%s: Local domain name not set\n", progname);
 		exit (1);
 	}
 
@@ -279,7 +276,7 @@ show_name(enum type_t type)
 			break;
 		case ALL_IPS:
 		case ALL_FQDNS: {
-			char buf[INET6_ADDRSTRLEN];
+			char buf[255];
 			int flags, ret, family, addrlen;
 
 			/* What kind of information do we want from getnameinfo()? */
@@ -410,7 +407,7 @@ read_file(char *filename, int boot)
 	}
 
 	if (fstat(fileno(fp), &st) == -1
-	   || (buf = (char *) malloc(st.st_size + 1)) == NULL)
+	   || (buf = (char *) calloc(st.st_size + 1, sizeof(char))) == NULL)
 		err(1, NULL);
 
 	while (fgets(buf, st.st_size + 1, fp) != NULL) {

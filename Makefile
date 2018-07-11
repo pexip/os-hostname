@@ -1,4 +1,4 @@
-CFLAGS+=-O2 -Wall
+CFLAGS+=-O2 -Wall -D_GNU_SOURCE
 
 # uncomment the following line if you want to install to a different base dir.
 #BASEDIR=/mnt/test
@@ -9,7 +9,7 @@ MANDIR:=/usr/share/man
 OBJS=hostname.o
 
 hostname: $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LDFLAGS) -lnsl
+	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LDFLAGS)
 	ln -fs hostname dnsdomainname
 	ln -fs hostname domainname
 	ln -fs hostname ypdomainname
