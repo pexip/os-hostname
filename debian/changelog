@@ -1,4 +1,4 @@
-hostname (3.18pexip1) pexip; urgency=low
+hostname (3.18+b1pexip1) pexip; urgency=low
 
   * Migrate to Stretch
   * Drop upstart job
