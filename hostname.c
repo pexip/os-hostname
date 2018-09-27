@@ -43,7 +43,7 @@
 #include <ctype.h>
 #include <err.h>
 
-#define VERSION "3.18"
+#define VERSION "3.21"
 
 enum type_t { DEFAULT, DNS, FQDN, SHORT, ALIAS, IP, NIS, NIS_DEF, ALL_FQDNS, ALL_IPS };
 
