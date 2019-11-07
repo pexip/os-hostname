@@ -43,7 +43,7 @@
 #include <ctype.h>
 #include <err.h>
 
-#define VERSION "3.21"
+#define VERSION "3.23"
 
 enum type_t { DEFAULT, DNS, FQDN, SHORT, ALIAS, IP, NIS, NIS_DEF, ALL_FQDNS, ALL_IPS };
 
@@ -56,8 +56,9 @@ char *progname;
 char *
 localnisdomain()
 {
-	/* The historical NIS limit is 1024, the limit on Linux is 64.  */
-	static char buf[1025];
+	/* The historical NIS limit is 1024, the limit on Linux is 64. We go
+	 * with the limit suggested for getnameinfo(), which should be 1025. */
+	static char buf[NI_MAXHOST];
 	int myerror = 0;
 
 	myerror = getdomainname(buf, sizeof buf);
@@ -276,7 +277,7 @@ show_name(enum type_t type)
 			break;
 		case ALL_IPS:
 		case ALL_FQDNS: {
-			char buf[255];
+			char buf[NI_MAXHOST];
 			int flags, ret, family, addrlen;
 
 			/* What kind of information do we want from getnameinfo()? */
