@@ -2,11 +2,9 @@ Source: hostname
 Section: admin
 Priority: required
 Maintainer: Pexip AS <packaging@pexip.com>
-XSBC-Pexip-Original-Maintainer: Debian Hostname Team <hostname-devel@lists.alioth.debian.org>
-XSBC-Pexip-Original-Uploaders: Michael Meskes <meskes@debian.org>
-Standards-Version: 3.9.8
-Build-Depends: debhelper (>= 9)
-XS-Pexip-Upstream: http://ftp.debian.org/debian/ buster
+XSBC-Pexip-Original-Maintainer: Michael Meskes <meskes@debian.org>
+Standards-Version: 4.2.1.1
+Build-Depends: debhelper (>= 11)
 
 Package: hostname
 Architecture: any
