@@ -1,3 +1,10 @@
+hostname (3.21pexip1) pexip; urgency=medium
+
+  * Migrate to Buster
+  * remove version check enforcement in debian/rules
+
+ -- Vincent Sanders <vince@pexip.com>  Fri, 28 Feb 2020 22:24:28 +0000
+
 hostname (3.21) unstable; urgency=medium
 
   * Minor fixes to the manpage.

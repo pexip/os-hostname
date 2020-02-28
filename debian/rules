@@ -28,7 +28,7 @@ build-stamp:
 	dh_testdir
 
 	# Building package
-	[ "$(DEB_VERSION)" = "$(PRGVERSION)" ] || exit 1
+	#[ "$(DEB_VERSION)" = "$(PRGVERSION)" ] || exit 1
 	CFLAGS="$(CFLAGS)" CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" $(MAKE) $(CROSS)
 
 	touch build-stamp
