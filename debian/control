@@ -5,7 +5,7 @@ Maintainer: Pexip AS <packaging@pexip.com>
 XSBC-Pexip-Original-Maintainer: Michael Meskes <meskes@debian.org>
 Standards-Version: 4.4.1
 Build-Depends: debhelper-compat (= 12)
-XS-Pexip-Upstream: http://deb.debian.org/debian/ bullseye
+XS-Pexip-Upstream: http://deb.debian.org/debian/ bookworm
 
 Package: hostname
 Architecture: any
