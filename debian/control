@@ -3,8 +3,11 @@ Section: admin
 Priority: required
 Maintainer: Pexip AS <packaging@pexip.com>
 XSBC-Pexip-Original-Maintainer: Michael Meskes <meskes@debian.org>
-Standards-Version: 4.4.1
-Build-Depends: debhelper-compat (= 12)
+Standards-Version: 4.7.0
+Build-Depends: debhelper-compat (= 13)
+Rules-Requires-Root: no
+Vcs-Browser: https://salsa.debian.org/meskes/hostname
+Vcs-Git: https://salsa.debian.org/meskes/hostname.git
 XS-Pexip-Upstream: http://deb.debian.org/debian/ trixie
 
 Package: hostname
